@@ -116,7 +116,10 @@ The sample file *sample.md* has these following lines:
 To upload these notes to **Evernote** following a structure like this:
 
 - Put all contents in the file to a new **Evernote** notebook. To do this, set "filename" as the **notebook** structure. In this case, the notebook created will be named "sample", the name of the file. 
-- Create one **Evernote** note in the newly create notebook for each heading1 section in the file. To do this, set "heading1" as the **title** structure. If multiple heading1s are found, create one note for each heading1 section. In this case, these 3 notes will be created: "The role of horizontal resolution in simulating drivers of the global hydrological cycle", "Changes in precipitation with climate change", "Multisource Estimation of Long-Term Terrestrial Water Budget for Major Global River Basins".
+- Create one **Evernote** note in the newly create notebook for each heading1 section in the file. To do this, set "heading1" as the **title** structure. If multiple heading1s are found, create one note for each heading1 section. In this case, these 3 notes will be created: 
+	- "The role of horizontal resolution in simulating drivers of the global hydrological cycle",
+	- "Changes in precipitation with climate change",
+	- "Multisource Estimation of Long-Term Terrestrial Water Budget for Major Global River Basins".
 - In each of the notes created above, use all contents with 1 or more tab indentions as its content. To do this, set "tablevel1" as the **content** structure. In this case, the note "Multisource Estimation of Long-Term Terrestrial Water Budget for Major Global River Basins" will contain the following lines:
 
 > 	> For evapotranspiration, in-situ-based estimates rely on networks of flux towers.
@@ -143,7 +146,7 @@ Putting everything together, to achieve the above:
 python txt2ever.py inputfile --notebook filename --title heading1 --content tablevel1 -m
 ```
 
-
+It's also possible to use same structure keyword for multiple structures, e.g. if "heading1" is set to both **notebook** and **title**, then 3 notebooks will be created using the 3 heading1s, in each notebook, one note is created using the same notebook name, with contents that are tab-indented by 1 level.
 
 
 ## Dependencies
