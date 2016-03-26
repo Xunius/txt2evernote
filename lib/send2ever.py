@@ -100,6 +100,9 @@ def createNote(title,content,tags,notebook,geeknote=None,\
     m=_h_re.match(title)
     if m:
         title=m.group(6)
+    m=_h_re.match(notebook)
+    if m:
+        notebook=m.group(6)
 
     if tags is not None and len(tags.split(','))>=MAX_NOTE_TAGS:
         tags=u','.join(tags.split(',')[:MAX_NOTE_TAGS])
