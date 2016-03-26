@@ -6,13 +6,15 @@ A python script to parse a structured text file and send contents to **Evernote*
 
 Parse a structured text file (written in **markdown** or **zim wiki** syntax, and structured with tab levels) and send contents to **Evernote**.
 
-The **structures** of a text file includes:
+The **structures** of a text file include:
 
-- "filename": yep, the name of the file, whose contents include all lines in file.
-- "heading1" - "heading6": heading defined either in **markdown** or **zim**. The contents of a "heading" is the heading's section.
-- "tablevel0" - "tablevel5": text blocks indented with a certain or more. E.g. "tablevel1" includes all text lines indented with 1 or more tabs.
+- "filename": corresponds to all lines in the input file.
+- "heading1" - "heading2": corresponds to all lines under a heading level.
+- "tablevel0" - "tablevel5": corresponds to all lines with indented with a certain number of tabs. E.g. "tablevel1" includes all text lines indented with 1 or more tabs.
 
-Better illustrates this with an example:
+
+
+Better illustrated with an example:
 
 
 The sample file *sample.md* has these following lines:
@@ -113,11 +115,29 @@ The sample file *sample.md* has these following lines:
 
 To upload these notes to **Evernote** following a structure like this:
 
-- Use "filename" as notebook name, if not exists, create new.
-- Use "heading1" as note title, if multiple heading1s are found, create one note for each heading1 section.
-- Use "tablevel1" as note content. In the above example, will be all lines with 1 or more tab-indentions.
+- Put all contents in the file to a new **Evernote** notebook. To do this, set "filename" as the **notebook** structure. In this case, the notebook created will be named "sample", the name of the file. 
+- Create one **Evernote** note in the newly create notebook for each heading1 section in the file. To do this, set "heading1" as the **title** structure. If multiple heading1s are found, create one note for each heading1 section. In this case, these 3 notes will be created: "The role of horizontal resolution in simulating drivers of the global hydrological cycle", "Changes in precipitation with climate change", "Multisource Estimation of Long-Term Terrestrial Water Budget for Major Global River Basins".
+- In each of the notes created above, use all contents with 1 or more tab indentions as its content. To do this, set "tablevel1" as the **content** structure. In this case, the note "Multisource Estimation of Long-Term Terrestrial Water Budget for Major Global River Basins" will contain the following lines:
 
-To do that:
+> 	> For evapotranspiration, in-situ-based estimates rely on networks of flux towers.
+	Although these networks are very sparse globally, progress has been made in
+	upscaling flux tower estimates to global coverage (Jung et al. 2009). Large-
+	scale estimates can also be derived from remote sensing using satellite-
+	retrieved radiation fluxes and surface meteorological conditions. The retrieval
+	is usually performed using an empirically based, process-based, or energy
+	balance model of boundary layer fluxes, such as the Penman Monteith (PM),
+	Priestly Taylor (PT), or the Surface Energy Balance System (SEBS) models (Su
+	2002) upscaled flux tower-based dataset from the Max Planck Institute (MPI) (
+	...... and the SEBSderived estimates ...... using radiation
+
+		- @Pan2012
+		- Tags: @None, @HydroCycle
+		- Ctime: 2015-05-12 22:40:00
+
+
+
+
+Putting everything together, to achieve the above:
 
 ```
 python txt2ever.py inputfile --notebook filename --title heading1 --content tablevel1 -m
@@ -125,9 +145,10 @@ python txt2ever.py inputfile --notebook filename --title heading1 --content tabl
 
 
 
+
 ## Dependencies
 
-**Geeknote** is required. And you need to login your **Evernote** account using **Geeknote** first before using this script.
+**Geeknote** **maybe** required. And you need to login your **Evernote** account using **Geeknote** first before using this script.
 
 
 ## Usage
