@@ -9,8 +9,8 @@ Parse a structured text file (written in **markdown** or **zim wiki** syntax, an
 The **structures** of a text file include:
 
 - "filename": corresponds to all lines in the input file.
-- "heading1" - "heading2": corresponds to all lines under a heading level.
-- "tablevel0" - "tablevel5": corresponds to all lines with indented with a certain number of tabs. E.g. "tablevel1" includes all text lines indented with 1 or more tabs.
+- "heading1" - "heading6": corresponds to all lines under a heading level.
+- "tablevel0" - "tablevel5": corresponds to all lines indented with a certain number of tabs. E.g. "tablevel1" includes all text lines indented with 1 or more tabs.
 
 
 
@@ -165,7 +165,7 @@ where:
 - `inputfile`: path to text file.
 - `NOTEBOOK`: structure to map to **Evernote** notebook name, choose from
 	- "filename"
-	- "heading1" - "heading2"
+	- "heading1" - "heading6"
 	- "tablevel0"- "tablevel5"
 	- "given": Give a notebook name. Currently not implemented for command line usage. You can look into the code to do that.
 - `TITLE`: structure to map to **Evernote** note title, choose from the above list.
