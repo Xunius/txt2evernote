@@ -8,6 +8,19 @@ import re
 
 
 
+def deu(text):
+    if isinstance(text,str):
+        return text.decode('utf8','replace')
+    else:
+        return text
+
+def enu(text):
+    if isinstance(text,unicode):
+        return text.encode('utf8','replace')
+    else:
+        return text
+
+
 
 #-------------------Read in text file and store data-------------------
 def readFile(abpath_in,verbose=True):
@@ -28,7 +41,7 @@ def readFile(abpath_in,verbose=True):
 
     with open(abpath_in, 'r') as fin:
         for line in fin:
-            lines.append(line)
+            lines.append(deu(line))
     lines=u''.join(lines)
 
     if verbose:
@@ -93,7 +106,7 @@ def saveFile(abpath_out,text,overwrite=True,verbose=True):
         print(abpath_out)
 
     with open(abpath_out, mode='a') as fout:
-        fout.write(text)
+        fout.write(enu(text))
 
     return
         
