@@ -97,7 +97,7 @@ class JobParser(object):
         self.filename=os.path.splitext(os.path.split(self.file_in)[1])[0]
 
         self.text=tools.readFile(self.file_in)
-        self.text=self.text.encode('utf8')
+        #self.text=self.text.encode('utf8')
         self.text=self.textparser.unifyNewline(self.text)
         
         self.lines=self.text.split('\n')
@@ -148,6 +148,7 @@ class JobParser(object):
         result=[]
 
         isin=False     # Inside a tab block or not
+        curlvl=0       # Previous tab level
 
         #------Find all lines with same or more tabs------
         for ii in xrange(linenum):
@@ -166,20 +167,25 @@ class JobParser(object):
                         pass
                 continue
 
+            #------------------Block finishes------------------
+            if tablvl<=targetlvl and tablvl<curlvl:
+                if isin:
+                    result.append(block)
+                isin=False
+
             if tablvl>=targetlvl:
                 #----------------Get to a new block----------------
                 if not isin:
                     block=TextContainer(lineii,struc,[ii,ii+1])
                 #--------------Still in same block--------------
-                if isin:
+                elif isin:
                     block.add(ii)
                 isin=True
 
-            #------------------Block finishes------------------
-            elif tablvl<targetlvl:
-                if isin:
-                    result.append(block)
-                isin=False
+            if isin:
+                curlvl=tablvl
+            else:
+                curlvl=0
 
             #-------------------End of lines-------------------
             if ii==linenum-1:
