@@ -50,6 +50,7 @@ def truncStr(string,length):
 def createNoteBook(title,geeknote=None,verbose=True):
 
     #-------------------Trunc title-------------------
+    title=title.strip()
     title=truncStr(title,MAX_NOTEBOOK_TITLE_LEN)
 
     #-------Make sure title doesnt start with #-------
@@ -91,7 +92,9 @@ def createNote(title,content,tags,notebook,geeknote=None,\
         skipnotebook=False):
 
     #-------------------Trunc texts-------------------
+    notebook=notebook.strip()
     notebook=truncStr(notebook,MAX_NOTEBOOK_TITLE_LEN)
+    title=title.strip()
     title=truncStr(title,MAX_NOTE_TITLE_LEN)
 
     #-------Make sure title doesnt start with #-------
